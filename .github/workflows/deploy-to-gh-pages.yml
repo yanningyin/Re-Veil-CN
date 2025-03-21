@@ -1,4 +1,3 @@
-
 name: Build and Deploy
 on:
   push:
@@ -55,12 +54,19 @@ jobs:
           npm install
           npm run build
 
-      - name: Create branch
-        uses: peterjgrainger/action-create-branch@v2.0.1
+      - name: Create branch if it doesn't exist
+        run: |
+          git fetch origin
+          if ! git rev-parse --verify origin/gh-pages; then
+            git checkout --orphan gh-pages
+            git reset --hard
+            git commit --allow-empty -m "Initial gh-pages commit"
+            git push origin gh-pages
+          else
+            git checkout gh-pages
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: gh-pages
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
