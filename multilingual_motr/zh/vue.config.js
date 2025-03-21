@@ -3,7 +3,7 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.csv$/,
+          test: /\.(csv|tsv)$/,
           loader: 'csv-loader',
           options: {
             dynamicTyping: true,
@@ -19,8 +19,8 @@ module.exports = {
     lintStyleOnBuild: false,
     stylelint: {}
   },
-  publicPath:
+  	publicPath:
     process.env.NODE_ENV === 'production'
-      ? '/Re-Veil/multilingual-motr/zh/'
-      : '/'
+    ? '/Re-Veil/multilingual-motr/zh/'
+    : '/'
 };
