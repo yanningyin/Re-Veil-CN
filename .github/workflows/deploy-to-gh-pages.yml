@@ -54,6 +54,11 @@ jobs:
           npm install
           npm run build
 
+      - name: Configure git
+        run: |
+          git config --global user.email "cui.ding@uzh.ch"
+          git config --global user.name "Cui Ding"
+
       - name: Create branch if it doesn't exist
         run: |
           git fetch origin
