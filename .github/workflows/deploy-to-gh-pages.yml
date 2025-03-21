@@ -7,7 +7,6 @@ on:
 
 jobs:
   build-and-deploy:
-
     strategy:
       matrix:
         folder:
@@ -58,6 +57,14 @@ jobs:
         run: |
           git config --global user.email "cui.ding@uzh.ch"
           git config --global user.name "Cui Ding"
+
+      - name: Remove existing worktree for gh-pages
+        run: |
+          if git worktree list | grep -q 'gh-pages'; then
+            git worktree remove gh-pages --force
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create branch if it doesn't exist
         run: |
