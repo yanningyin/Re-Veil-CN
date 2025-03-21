@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "magpie-base": "git+https://github.com/cuierd/magpie-base-MoTR.git#main",
-    "v-blur": "^1.0.4"
+    "v-blur": "^1.0.4",
+    "webgazer": "^2.0.0" 
   },
   "engines": {
     "node": "^16.x",
