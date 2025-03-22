@@ -92,7 +92,7 @@
     </InstructionScreen>
 
 
-    <template v-for="(trial, i) of trials">
+    <template v-for="(trial, i) of trials.slice(0, 2)">
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide class="text_slide">
           <form>
