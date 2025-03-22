@@ -1,5 +1,5 @@
 export default {
-  experimentId: '1',
+  experimentId: '34',
   serverUrl: 'https://re-veil-backend-83c42dec8100.herokuapp.com/',
   socketUrl: 'wss://re-veil-backend-83c42dec8100.herokuapp.com/socket',
   // this will be used in prolific mode
