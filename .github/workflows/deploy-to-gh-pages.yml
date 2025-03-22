@@ -63,6 +63,9 @@ jobs:
           if git worktree list | grep -q 'gh-pages'; then
             git worktree remove gh-pages --force
           fi
+          if [ -d "github-pages-deploy-action-temp-deployment-folder" ]; then
+            rm -rf github-pages-deploy-action-temp-deployment-folder
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
