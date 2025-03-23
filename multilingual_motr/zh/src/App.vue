@@ -319,7 +319,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Nato Sans', 'Noto Sans SC', 'Noto Sans TC', sans-serif;
+    font-family: "Songti SC", "SimSun", "NSimSun", serif;
   }
   .main_screen {
     isolation: isolate;
