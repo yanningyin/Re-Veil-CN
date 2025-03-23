@@ -88,11 +88,11 @@
         <a href="javascript:void(0)" @click="turnOnFullScreen">全屏模式</a>
       </p>
  -->
-      <p>接下来您将阅读一些文本并回答相关问题。与正常阅读不同的是，文本将被模糊处理。要使文本清晰可见，请将鼠标移动到文本上。请充分阅读并理解文本。阅读完毕后请点击“回答问题”并作答。</p>
+      <p>接下来您将阅读一些文本并回答问题。与正常阅读不同，这些文本已被模糊处理。为使其清晰可见，请将鼠标移动到文本上。请充分阅读并理解文本。阅读完毕后请点击“回答问题”来作答。</p>
     </InstructionScreen>
 
 
-    <template v-for="(trial, i) of trials.slice(0, 2)">
+    <template v-for="(trial, i) of trials">
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide class="text_slide">
           <form>
@@ -148,18 +148,18 @@
       </Screen>
     </template>
 <Screen>
-  <p>1. Which input device are you using for this experiment?</p>
+  <p>1. 您在这个实验中使用了哪种输入设备？</p>
     <MultipleChoiceInput
         :response.sync= "$magpie.measurements.device"
         orientation="horizontal"
-        :options="['Computer Mouse', 'Computer Trackpad', 'Other']" />
+        :options="['鼠标', '触控板', '触控笔', '其他']" />
   <br>
   <br>
-  <p>2. Which hand are you using during this experiment?</p>
+  <p>2. 您在这个实验中用的是哪只手？</p>
     <MultipleChoiceInput
         :response.sync= "$magpie.measurements.hand"
         orientation="horizontal"
-        :options="['Left', 'Right', 'Both']" />
+        :options="['左手', '右手', '双手并用']" />
   <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
 </Screen>
 
@@ -180,7 +180,7 @@ export default {
     const shuffledGroups = _.shuffle(Object.values(groupedItems));
     const shuffledItems = _.flatMap(shuffledGroups);
     const trials = _.concat(onestop_zh_practice, shuffledItems);
-    console.log("hah", trials);
+    // console.log("hah", trials);
 
     const wordRevealParts = ['f', 'u', 'l'] // which part of the word to reveal: full, upper half, lower half
     // Create a new column in localCoherences called 'response_options'
@@ -293,8 +293,6 @@ export default {
       }
       oval.style.left = `${x}px`;
       oval.style.top = `${y-9}px`;
-
-
 
       console.log(this.currentIndex);
       this.mousePosition.x = e.clientX;
