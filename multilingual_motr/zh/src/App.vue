@@ -135,7 +135,7 @@
             <form>
               <input type="hidden" class="question_id" :value="trial.question_id">
               <p>{{ trial.question}}</p>
-                <template v-for='(option, index) of [trial.response_true, trial.distractor_1, trial.distractor_2, trial.distractor_3]'>
+                <template v-for='(option, index) of trial.response_options'>
                   <input :id="'opt_'+index" type="radio" :value="option" name="opt"  v-model="$magpie.measurements.response" />&nbsp&nbsp{{option}}<br/>
                 </template>
             </form>
@@ -188,7 +188,7 @@ export default {
     const shuffledWordRevealParts = _.shuffle(Array.from({ length: trials.length }, (_, i) => wordRevealParts[i % wordRevealParts.length]));
     const updatedTrials = trials.map((trial, index) => ({
       ...trial,
-      response_options: _.shuffle([trial.response_true, trial.disractor_1, trial.disractor_2, trial.disractor_3]),
+      response_options: _.shuffle([trial.response_true, trial.distractor_1, trial.distractor_2, trial.distractor_3]),
       wordRevealPart: shuffledWordRevealParts[index]
     }));
     
@@ -196,6 +196,7 @@ export default {
     // console.log('All assigned wordRevealParts:', wordRevealPartsAssigned);
     const counts = _.countBy(wordRevealPartsAssigned);
     // console.log('Counts of each wordRevealPart:', counts);
+    
 
     return {
       hasRead: false,
