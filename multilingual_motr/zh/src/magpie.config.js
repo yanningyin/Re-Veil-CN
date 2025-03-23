@@ -1,5 +1,5 @@
 export default {
-  experimentId: '36',
+  experimentId: '67',
   serverUrl: 'https://re-veil-backend-83c42dec8100.herokuapp.com/',
   socketUrl: 'wss://re-veil-backend-83c42dec8100.herokuapp.com/socket',
   // experimentId: '34',

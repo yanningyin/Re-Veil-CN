@@ -18,7 +18,7 @@
         <p>
             欢迎参与我们的研究项目。您的参与是完全自愿的。请仔细阅读如下信息。如有任何疑问，请随时联系我们。
         <br><br>
-          <b>研究内容和方式是什么？</b> 您将参与由苏黎世大学博士生 Cui Ding 进行的研究。本研究将帮助我们了解人们如何阅读。完成研究大约需要 20 分钟。
+          <b>研究内容和方式是什么？</b> 您将参与由苏黎世大学数字语言学小组进行的研究。本研究将帮助我们了解人们如何阅读。完成研究大约需要 20 分钟。
         <br><br>
           <b>谁可以参加？</b> 母语为中文的成年人。
         <br><br>
@@ -82,13 +82,13 @@
 
 
 
-    <InstructionScreen :title="'说明'">
+    <InstructionScreen :title="'说明'" :button-text="'继续'">
 <!-- 
       <p>请在实验期间使用“全屏模式”：
         <a href="javascript:void(0)" @click="turnOnFullScreen">全屏模式</a>
       </p>
  -->
-      <p>接下来您将阅读一些文本并回答问题。与正常阅读不同，这些文本已被模糊处理。为使其清晰可见，请将鼠标移动到文本上。请充分阅读并理解文本。阅读完毕后请点击“回答问题”来作答。</p>
+      <p>接下来您将阅读一些文本并回答问题。与正常阅读不同，这些文本已被模糊处理。为使其清晰可见，请将鼠标移动到文本上：部分仅会显示上半部分文字，部分仅显示下半部分，亦有部分可完整显示。请努力阅读或根据部分字体信息猜测并理解文本。阅读完毕后请点击“回答问题”来作答。</p>
     </InstructionScreen>
 
 
@@ -98,7 +98,8 @@
           <form>
             <input type="hidden" class="item_id" :value="trial.item_id">
             <input type="hidden" class="stimulus_id" :value="trial.stimulus_id">
-            <input type="hidden" class="condition_id" :value="trial.condition_id">
+            <input type="hidden" class="page_id" :value="trial.page_id">
+            <input type="hidden" class="question_id" :value="trial.question_id">
             <input type="hidden" class="wordRealPart" :value="trial.wordRevealPart">
           </form>
           <div class="oval-cursor"></div>
@@ -124,12 +125,12 @@
             </div>
           </template>
 
-          <button style= "transform: translate(-50%, -50%)" @click="handleButtonClick" :disabled="!isCursorMoving">
-                  {{ '回答问题' }}
+          <button style= "transform: translate(-50%, -50%)" @click="trial.question_id == null ? saveAndDisable() : handleRCQButton()" :disabled="!hasRead">
+                  {{ trial.question_id == null ? '下一页': '回答问题' }}
           </button>
         </Slide>
 
-        <Slide class="question_slide">
+        <Slide class="question_slide" v-if="trial.question_id">
           <div class="radio-options">
             <form>
               <input type="hidden" class="question_id" :value="trial.question_id">
@@ -159,7 +160,7 @@
     <MultipleChoiceInput
         :response.sync= "$magpie.measurements.hand"
         orientation="horizontal"
-        :options="['左手', '右手', '双手并用']" />
+        :options="['左手', '右手', '双手']" />
   <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
 </Screen>
 
@@ -168,8 +169,9 @@
 </template>
 
 <script>
+
 // Load data from csv files as javascript arrays with objects
-import onestop_zh_practice from '../trials/onestop_zh_practice.tsv';
+// import onestop_zh_practice from '../trials/onestop_zh_practice.tsv';
 import onestop_zh from '../trials/onestop_zh.tsv';
 import _ from 'lodash';
 
@@ -179,24 +181,27 @@ export default {
     const groupedItems = _.groupBy(onestop_zh, 'stimulus_id');
     const shuffledGroups = _.shuffle(Object.values(groupedItems));
     const shuffledItems = _.flatMap(shuffledGroups);
-    const trials = _.concat(onestop_zh_practice, shuffledItems);
-    // console.log("hah", trials);
+    // const trials = _.concat(onestop_zh_practice, shuffledItems);
+    const trials = shuffledItems;
 
     const wordRevealParts = ['f', 'u', 'l'] // which part of the word to reveal: full, upper half, lower half
-    // Create a new column in localCoherences called 'response_options'
-    // that concatenates the word in response_true with the two words in response_distractors
-    const updatedTrials = trials.map(trial => {
-      return {
-        ...trial,
-        response_options: _.shuffle([trial.response_true, trial.disractor_1, trial.disractor_2, trial.disractor_3]),
-        wordRevealPart: wordRevealParts[Math.floor(Math.random() * wordRevealParts.length)]
-      }
-    });
+    const shuffledWordRevealParts = _.shuffle(Array.from({ length: trials.length }, (_, i) => wordRevealParts[i % wordRevealParts.length]));
+    const updatedTrials = trials.map((trial, index) => ({
+      ...trial,
+      response_options: _.shuffle([trial.response_true, trial.disractor_1, trial.disractor_2, trial.disractor_3]),
+      wordRevealPart: shuffledWordRevealParts[index]
+    }));
+    
+    const wordRevealPartsAssigned = updatedTrials.map(trial => trial.wordRevealPart);
+    // console.log('All assigned wordRevealParts:', wordRevealPartsAssigned);
+    const counts = _.countBy(wordRevealPartsAssigned);
+    // console.log('Counts of each wordRevealPart:', counts);
+
     return {
-      isCursorMoving: false,
+      hasRead: false,
+      // isCursorMoving: false,
       trials: updatedTrials,
       currentIndex: null,
-      showFirstDiv: true,
       // currentItem: null,
       mousePosition: {
           x: 0,
@@ -221,8 +226,9 @@ export default {
             const currentElementRect = currentElement.getBoundingClientRect();
             $magpie.addTrialData({
               Stimulus: this.$el.querySelector(".stimulus_id").value,
-              Condition: this.$el.querySelector(".condition_id").value,
+              // Condition: this.$el.querySelector(".condition_id").value,
               ItemId: this.$el.querySelector(".item_id").value,
+              PageId: this.$el.querySelector(".page_id").value,
               Index: this.currentIndex,
               Word: currentElement.innerHTML,
               mousePositionX: this.mousePosition.x,
@@ -240,8 +246,9 @@ export default {
         } else {
           $magpie.addTrialData({
               Stimulus: this.$el.querySelector(".stimulus_id").value,
-              Condition: this.$el.querySelector(".condition_id").value,
+              // Condition: this.$el.querySelector(".condition_id").value,
               ItemId: this.$el.querySelector(".item_id").value,
+              PageId: this.$el.querySelector(".page_id").value,
               Index: this.currentIndex,
               mousePositionX: this.mousePosition.x,
               mousePositionY: this.mousePosition.y,
@@ -251,25 +258,11 @@ export default {
         }
       }},
     moveCursor(e) {
-      this.isCursorMoving = true;
+      this.hasRead = true;
       let oval = this.$el.querySelector(".oval-cursor");
       // this.$el.querySelector(".oval-cursor").classList.add('grow');
       let x = e.clientX;
       let y = e.clientY;
-
-      // const elementAtCursor= document.elementFromPoint(x, y).closest('span');
-      // if (elementAtCursor){
-      //   this.$el.querySelector(".oval-cursor").classList.remove('blank');
-      //   this.currentIndex = elementAtCursor.getAttribute('data-index');
-      // } else {
-      //   this.$el.querySelector(".oval-cursor").classList.add('blank');
-      //   const elementAboveCursor = document.elementFromPoint(x, y-6).closest('span');
-      //   if (elementAboveCursor){
-      //     this.currentIndex = elementAboveCursor.getAttribute('data-index');
-      //   } else {
-      //     this.currentIndex = -1;
-      //   }
-      // }
 
       const elementAtCursor= document.elementFromPoint(x, y).closest('span');
       if (elementAtCursor){
@@ -300,15 +293,14 @@ export default {
       // this.mousePosition.x = e.offsetX;
       // this.mousePosition.y = e.offsetY;
     },
-    toggleDivs() {
-    this.showFirstDiv = !this.showFirstDiv;
-    this.isCursorMoving = false;
+    handleRCQButton() {
+      $magpie.nextSlide();
+    this.hasRead = false;
     },
 
-    handleButtonClick() {
-      // Perform actions in the specified order
-      $magpie.nextSlide();
-      this.isCursorMoving = false;
+    saveAndDisable() {
+    $magpie.saveAndNextScreen();
+    this.hasRead = false;
     },
 
     getScreenDimensions() {
@@ -327,6 +319,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Nato Sans', 'Noto Sans SC', 'Noto Sans TC', sans-serif;
   }
   .main_screen {
     isolation: isolate;
@@ -376,12 +369,8 @@ export default {
     height: 13px;
   }
   .oval-cursor.grow {
-    /* width: 102px; */
-    /* height: 38px; */
-    /* width: 50px; */
-    /* height: 50px; */
-    width: 40px;
-    height: 35px; 
+    width: 50px;
+    height: 40px; 
     border-radius: 50%;
     /* border-radius: 0; */
     /* border: 0.1px solid red;  */
