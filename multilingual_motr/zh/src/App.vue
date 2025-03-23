@@ -319,7 +319,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Songti SC", "SimSun", "NSimSun", serif;
   }
   .main_screen {
     isolation: isolate;
