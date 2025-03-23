@@ -149,19 +149,26 @@
       </Screen>
     </template>
 <Screen>
-  <p>1. 您在这个实验中使用了哪种输入设备？</p>
+  <p>1. 您觉得只显示文字上半部分和只显示文字下半部分，哪种更容易阅读？</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.device"
+        orientation="horizontal"
+        :options="['只显示上半部分', '只显示下半部分', '难易相当']" />
+  <br>
+  <br>
+  <p>2. 您在这个实验中使用了哪种输入设备？</p>
     <MultipleChoiceInput
         :response.sync= "$magpie.measurements.device"
         orientation="horizontal"
         :options="['鼠标', '触控板', '触控笔', '其他']" />
   <br>
   <br>
-  <p>2. 您在这个实验中用的是哪只手？</p>
+  <p>3. 您在这个实验中使用了什么电脑操作系统？</p>
     <MultipleChoiceInput
         :response.sync= "$magpie.measurements.hand"
         orientation="horizontal"
-        :options="['左手', '右手', '双手']" />
-  <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
+        :options="['微软Windows', '苹果MacOS', '其它']" />
+  <button style= "bottom: 5%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">提交</button>
 </Screen>
 
     <SubmitResultsScreen />
@@ -288,7 +295,7 @@ export default {
       oval.style.left = `${x}px`;
       oval.style.top = `${y-9}px`;
 
-      console.log(this.currentIndex);
+      // console.log(this.currentIndex);
       this.mousePosition.x = e.clientX;
       this.mousePosition.y = e.clientY;
       // this.mousePosition.x = e.offsetX;
