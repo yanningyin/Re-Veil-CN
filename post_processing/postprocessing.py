@@ -94,7 +94,7 @@ def main():
         raw_file = Path(args.in_file)
         file_divider = FileDivider(raw_file, Path(args.divided_dir))
         file_divider.divide_raw_file()
-        file_divider.correct_motr_data()
+        # file_divider.correct_motr_data()
 
     # Step 2: preprocess the trial data file by splitting sentences into words and extract useful info from these files
 

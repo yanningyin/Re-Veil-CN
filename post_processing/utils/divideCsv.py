@@ -15,7 +15,7 @@ class FileDivider:
         # self.new_data_path = Path(f"{new_data_path}")
         self.new_data_path = new_data_path
         self.raw_data_df = pd.read_csv(self.raw_data_path, dtype={"Index": str, "ItemId": str,
-                                                                  "Condition": str, "Experiment": str,
+                                                                  "PageId": str, "Stimulus": str,
                                                                   "mousePositionX": str, "mousePositionY": str})
 
     # Check if the directory for the divided files exists, if not, make one
@@ -40,16 +40,16 @@ class FileDivider:
         self.raw_data_df.dropna(subset=['ItemId'], inplace=True)
         self.raw_data_df['ItemId'] = self.raw_data_df['ItemId'].astype(float)
         self.raw_data_df['ItemId'] = self.raw_data_df['ItemId'].astype(int)
-        self.raw_data_df['Experiment'].fillna(method='ffill', inplace=True)
-        self.raw_data_df['Experiment'] = self.raw_data_df['Experiment'].astype(float).astype(int)
-        self.raw_data_df['Condition'].fillna(method='ffill', inplace=True)
-        self.raw_data_df['Condition'] = self.raw_data_df['Condition'].astype(float).astype(int)
-        self.raw_data_df['Index'].fillna(value=-100, inplace=True)
-        self.raw_data_df['Index'] = self.raw_data_df['Index'].astype(float).astype(int)
+        self.raw_data_df['PageId'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['PageId'] = self.raw_data_df['PageId'].astype(float).astype(int)
+        self.raw_data_df['Stimulus'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['Stimulus'] = self.raw_data_df['Stimulus'].astype(float).astype(int)
+        self.raw_data_df['Index'].fillna(value='-999', inplace=True)
+        # self.raw_data_df['Index'] = self.raw_data_df['Index'].astype(float).astype(int)
         # self.raw_data_df['Word'].fillna(value="NULL", inplace=True)
-        self.raw_data_df['mousePositionX'].fillna(value=425, inplace=True)
+        self.raw_data_df['mousePositionX'].fillna(value=0, inplace=True)
         self.raw_data_df['mousePositionX'] = self.raw_data_df['mousePositionX'].astype(float).astype(int)
-        self.raw_data_df['mousePositionY'].fillna(value=285, inplace=True)
+        self.raw_data_df['mousePositionY'].fillna(value=0, inplace=True)
         self.raw_data_df['mousePositionY'] = self.raw_data_df['mousePositionY'].astype(float).astype(int)
 
     def correct_motr_data(self):
@@ -107,7 +107,11 @@ class FileDivider:
             df.to_csv(f'{corrected_divided_path}/{file_path.stem}.csv', index=False)
         print(f"All files in '{self.new_data_path}' have been processed and corrected files are saved in '{corrected_divided_path}'.")
 
-
+if __name__ == '__main__':
+    raw_data_path = Path('../data/pilot/raw_data/pilot_1.csv')
+    new_data_path = Path('../data/pilot/divided_data')
+    file_divider = FileDivider(raw_data_path, new_data_path)
+    file_divider.divide_raw_file()
 
 
 

@@ -16,23 +16,23 @@
             <b> 关于本研究 </b>
         </div>
         <p>
-            欢迎参与我们的研究项目。您的参与是完全自愿的。请仔细阅读如下信息。如有任何疑问，请随时联系我们。
+            欢迎参与我们的研究项目。请阅读如下信息。如有任何疑问，请联系我们。
         <br><br>
-          <b>研究内容和方式是什么？</b> 您将参与由苏黎世大学数字语言学小组进行的研究。本研究将帮助我们了解人们如何阅读。完成研究大约需要 20 分钟。
-        <br><br>
-          <b>谁可以参加？</b> 母语为中文的成年人。
+          <b>研究内容是什么？</b> 您将参与由苏黎世大学数字语言学小组进行的研究。本研究将帮助我们了解人们如何阅读。
+        <!-- <br><br>
+          <b>谁可以参加？</b> 母语为中文的成年人。 -->
         <br><br>
          <b>我需要做什么？</b> 您将通过移动鼠标来阅读一些文本，并回答相关问题。
         <br><br>
           <b>我的权利是什么？</b> 在参与过程中，您可以随时关闭网页退出本研究，无需说明理由，也不会有任何不利影响。
         <br><br>
-          <b>有哪些风险？</b> 参与本研究不会带来任何可预见的风险。
+          <!-- <b>有哪些风险？</b> 参与本研究不会带来任何可预见的风险。
         <br><br>
           <b>会获得报酬吗？</b> 您将根据 prolific.co 上指定的金额获得报酬。
+        <br><br> -->
+          <b>我的数据会如何被收集和使用？</b> 当您阅读我们提供的文本时，鼠标在屏幕上的位置会被记录。本研究的数据将保持完全匿名。我们将严格遵守保密原则。
         <br><br>
-          <b>我的数据会如何被收集和使用？</b> 当您阅读我们提供的文本时，鼠标在屏幕上的位置会被记录。本研究的数据可能会在科学会议上展示，发表在科学期刊以及在线存储库中。所有数据都将保持完全匿名。苏黎世大学伦理委员会的成员可能会访问原始数据以进行审查。我们在任何时候都会严格遵守保密原则。
-        <br><br>
-          <b> 我对我的个人数据有何权利？ </b> 您可以随时要求获取关于您个人数据的信息，而无需提供理由。您还可以要求修改、提供、限制处理或删除您的个人数据。为此，请联系如下负责人。
+          <b> 我对数据有何权利？ </b> 您可以随时要求获取、修改、限制或删除您的数据。为此，请联系如下负责人。
         <!-- <br><br>
           <b>本研究由谁资助？</b> 本研究由 ETH 博士后奖学金资助，该奖学金授予 Ethan Wilcox。 -->
         <!-- <br><br>
@@ -52,11 +52,11 @@
         </div>
         <br>
         我，作为参与者，通过点击下方按钮确认： <br>
-        <div style="padding-left: 30px">• 我已阅读并理解关于本研究的信息。我的任何疑问已得到满意答复。 </div>
-        <div style="padding-left: 30px">• 我符合上述参与研究的条件，并了解研究期间需要遵守的要求和规则。 </div>
+        <div style="padding-left: 30px">• 我已阅读并理解关于本研究的信息。 </div>
+        <div style="padding-left: 30px">• 我符合参与研究的条件，并了解需要遵守的要求和规则。 </div>
         <div style="padding-left: 30px">• 我有足够的时间来决定是否参与。 </div>
         <div style="padding-left: 30px">• 我自愿参与本研究，并同意按照如上所述使用我的个人数据。</div>
-        <div style="padding-left: 30px">• 我了解我可以随时终止参与本研究。</div>
+        <!-- <div style="padding-left: 30px">• 我了解我可以随时终止参与本研究。</div> -->
         <br>
 
           <tr>
@@ -88,9 +88,13 @@
         <a href="javascript:void(0)" @click="turnOnFullScreen">全屏模式</a>
       </p>
  -->
-      <p>接下来您将阅读一些文本并回答问题。与正常阅读不同，这些文本已被模糊处理。为使其清晰可见，请将鼠标移动到文本上：部分仅会显示上半部分文字，部分仅显示下半部分，亦有部分可完整显示。请努力阅读或根据部分字体信息猜测并理解文本。阅读完毕后请点击“回答问题”来作答。</p>
+      <p></p>
+      <p>本研究的灵感来自于豆瓣上一位网友的偶然经历：该网友的打印机出了点问题，打印出来的文字只能显示上面一半或下面一半，然后网友发现仅有一半的文字似乎也不影响阅读。不过，仅有上半部分和仅有下半部分的文字，哪一种更容易阅读呢？
+        这个问题引起了众多网友的兴趣和讨论，也被编选入“豆瓣社区小报”。对这个问题的回答可谓见仁见智，但尚无定论。</p>
+      <p>汉字作为目前世界上唯一在用的象形文字，究竟哪一部分承担的信息量更大呢？同样充满好奇的我们试图通过本研究来科学地回答这个问题。</p>
+      <p>接下来您将阅读一些文本并回答问题。与正常阅读不同的是，这些文本已被模糊处理。为使其清晰可见，请将鼠标移动到文本上：有些文本仅会显示上半部分文字，有些仅显示下半部分，有些会完整显示。请努力阅读或根据部分字体信息猜测并理解文本。阅读完毕后请点击“回答问题”来作答。</p>
+      <p>准备好了吗？让我们一起解开这个有趣现象背后的秘密吧！</p>
     </InstructionScreen>
-
 
     <template v-for="(trial, i) of trials">
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
@@ -151,7 +155,7 @@
 <Screen>
   <p>1. 您觉得只显示文字上半部分和只显示文字下半部分，哪种更容易阅读？</p>
     <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.device"
+        :response.sync= "$magpie.measurements.difficulty"
         orientation="horizontal"
         :options="['只显示上半部分', '只显示下半部分', '难易相当']" />
   <br>
@@ -165,7 +169,7 @@
   <br>
   <p>3. 您在这个实验中使用了什么电脑操作系统？</p>
     <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.hand"
+        :response.sync= "$magpie.measurements.os"
         orientation="horizontal"
         :options="['微软Windows', '苹果MacOS', '其它']" />
   <button style= "bottom: 5%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">提交</button>
@@ -193,15 +197,23 @@ export default {
 
     const wordRevealParts = ['f', 'u', 'l'] // which part of the word to reveal: full, upper half, lower half
     const shuffledWordRevealParts = _.shuffle(Array.from({ length: trials.length }, (_, i) => wordRevealParts[i % wordRevealParts.length]));
+    // Ensure first trial gets 'f'
+    if (shuffledWordRevealParts[0] !== 'f') {
+      const fIndex = shuffledWordRevealParts.indexOf('f');
+      if (fIndex !== -1) {
+        // Swap the first item with the first occurrence of 'f'
+        [shuffledWordRevealParts[0], shuffledWordRevealParts[fIndex]] = [shuffledWordRevealParts[fIndex], shuffledWordRevealParts[0]];
+      }
+    }
     const updatedTrials = trials.map((trial, index) => ({
       ...trial,
       response_options: _.shuffle([trial.response_true, trial.distractor_1, trial.distractor_2, trial.distractor_3]),
       wordRevealPart: shuffledWordRevealParts[index]
     }));
     
-    const wordRevealPartsAssigned = updatedTrials.map(trial => trial.wordRevealPart);
+    // const wordRevealPartsAssigned = updatedTrials.map(trial => trial.wordRevealPart);
     // console.log('All assigned wordRevealParts:', wordRevealPartsAssigned);
-    const counts = _.countBy(wordRevealPartsAssigned);
+    // const counts = _.countBy(wordRevealPartsAssigned);
     // console.log('Counts of each wordRevealPart:', counts);
     
 
@@ -241,10 +253,10 @@ export default {
               Word: currentElement.innerHTML,
               mousePositionX: this.mousePosition.x,
               mousePositionY: this.mousePosition.y,
-              wordPositionTop: currentElementRect.top,
-              wordPositionLeft: currentElementRect.left,
-              wordPositionBottom: currentElementRect.bottom,
-              wordPositionRight: currentElementRect.right,
+              // wordPositionTop: currentElementRect.top,
+              // wordPositionLeft: currentElementRect.left,
+              // wordPositionBottom: currentElementRect.bottom,
+              // wordPositionRight: currentElementRect.right,
               wordRevealPart: this.$el.querySelector(".wordRealPart").value,
               // wordPositionTop: currentElement.offsetTop,
               // wordPositionLeft: currentElement.offsetLeft,
