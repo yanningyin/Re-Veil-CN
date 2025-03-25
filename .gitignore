@@ -42,9 +42,11 @@ preprocessed_trialData/
 fixations/
 reading_measures/
 raw_data/
+data/
 associations/
 corrected_divided/
 temp/
+pilot/
 review_response/
 provo_cleaned_raw_fixation_not_merged/
 BSPR_f150/
