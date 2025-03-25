@@ -60,7 +60,7 @@
         <br>
 
           <tr>
-          <td>请输入您的姓名拼音+当前年月日（如：zhangsan20150325）：&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+          <td>请输入您的姓名拼音+当前日期(如: zhangsan0326)以继续:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
           </tr>
           <tr>
 
