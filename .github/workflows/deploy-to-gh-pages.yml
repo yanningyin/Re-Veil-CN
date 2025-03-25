@@ -61,7 +61,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: gh-pages
-          base: main
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
