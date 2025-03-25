@@ -21,6 +21,6 @@ module.exports = {
   },
   	publicPath:
     process.env.NODE_ENV === 'production'
-    ? '/Re-Veil/multilingual_motr/zh/'
+    ? '/Re-Veil-CN/multilingual_motr/zh/'
     : '/'
 };
