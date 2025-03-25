@@ -129,7 +129,7 @@
             </div>
           </template>
 
-          <button style= "transform: translate(-50%, -50%)" @click="trial.question_id == null ? saveAndDisable() : handleRCQButton()" :disabled="!hasRead">
+          <button style= "bottom: 25%; transform: translate(-50%, -50%)" @click="trial.question_id == null ? saveAndDisable() : handleRCQButton()" :disabled="!hasRead">
                   {{ trial.question_id == null ? '下一页': '回答问题' }}
           </button>
         </Slide>
@@ -145,7 +145,7 @@
             </form>
           </div>
           <!-- <button v-if="$magpie.measurements.response"  style="transform: translate(-50%, -50%)" @click="$magpie.saveMeasurements(); $magpie.measurements.response=''; j !== trial.length - 1 ? $magpie.nextSlide() : $magpie.nextScreen()"> -->
-            <button v-if="$magpie.measurements.response" style="transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen()">
+            <button v-if="$magpie.measurements.response" style="bottom: 25%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen()">
             {{ '下一页' }}
           </button>
         </Slide>
@@ -346,7 +346,7 @@ export default {
     width: 100%;
     height: auto;
     font-size: 18px;
-    line-height: 40px;
+    line-height: 50px;
     /* font-size: 22px;
     line-height: 50px; */
   }
